@@ -1,5 +1,5 @@
 // require('../index.js')
-import {pathValidate} from"../index.js";
+import {pathValidate} from"../src/getAllMds.js";
 
 
 
