@@ -52,11 +52,11 @@ console.log(getLinksMd(mdLinks('./test')));
 // const validateLinks = arrLinks => Promise.all(arrLinks.map(objLink => validateEachLink(objLink)) );
 
 export const linksValidate = (arrObjLinks) => {  
-    const travelArrObjLinks = arrObjLinks.map((linkObj) => {
+    const objLinksValidate = arrObjLinks.map((linkObj) => {
       return new Promise((resolve, reject) => {
         fetch(linkObj.href)
           .then(response => {
-            if (response.status >= 200 && response.status < 400) {
+            if (response.status >= 200 && response.status < 300) {
               linkObj.status = response.status;
               linkObj.message = response.statusText; 
               resolve(linkObj);            
@@ -71,7 +71,7 @@ export const linksValidate = (arrObjLinks) => {
       });
     });
     
-    return Promise.all(travelArrObjLinks);
+    return Promise.all(objLinksValidate);
   };
 
   const linkStats = arrLinks => ([{
