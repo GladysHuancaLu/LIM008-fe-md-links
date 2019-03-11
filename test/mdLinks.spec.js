@@ -1,5 +1,5 @@
 // require('../index.js')
-import {pathValidate} from"../src/getAllMds.js";
+import {pathValidate, validateDirectory} from"../src/getAllMds.js";
 
 
 
@@ -12,12 +12,12 @@ describe('pathValidate', () => {
   });
 })
 
-describe('convertDirectory', () => {
-  it('convertDirectory debería ser una funcion', () => {
-    expect(typeof convertDirectory).toBe('function');
+describe('validateDirectory', () => {
+  it('validateDirectory debería ser una funcion', () => {
+    expect(typeof validateDirectory).toBe('function');
   });  
-  it('convertDirectory debería devolver true si la ruta es un directorio', () => {
-  expect(convertDirectory('.\\test')).toBe('C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test');
+  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
+  expect(validateDirectory('.\\test')).toBe(true);
   });
 })
 
