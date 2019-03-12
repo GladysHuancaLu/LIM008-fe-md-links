@@ -3,53 +3,11 @@ const path = require('path');
 const marked = require('marked');
 const fetch = require('node-fetch');
 
-import {validateDirectory} from './getAllMds.js'
+import {getLinksMd, getMdFiles } from './getAllMds.js'
 
-const getLinksMd = (arrayFiles) => {
-    const arrLinks = [];
-    arrayFiles.forEach(file => {
-      const fileMd = fs.readFileSync(file, 'utf8');
-      const renderer = new marked.Renderer();
-      renderer.link = (href, title, text) => {
-        arrLinks.push({
-          text: text,
-          href: href,
-          file: file
-        });
-      };
-      marked(fileMd, { renderer })
-    })
-    return arrLinks;
-};
 
-const mdLinks = (path1) => {
-    let arrFile= [];
-    const leeDirectorio = fs.readdirSync(path1)
-    leeDirectorio.forEach((file)=> {
-        const pathSon= path.join(path1,file);
-        if(validateDirectory(pathSon)){
-            arrFile = arrFile.concat(mdLinks(pathSon));
-        }
-        else if(path.extname(pathSon)=== '.md'){
-            arrFile.push(pathSon);
-        }
-    });
-    return arrFile;
-}
 
-console.log(getLinksMd(mdLinks('./test')));
-
-// const validateEachLink = ({ text, href, file }) => fetch(href)
-//   .catch(() => ({
-//     status: 404,
-//     // statusText: 'Fail'
-//   }))
-//   .then(response => ({text, href, file,
-//     status: response.status,
-//     // statusText: response.statusText
-//   }));
-
-// const validateLinks = arrLinks => Promise.all(arrLinks.map(objLink => validateEachLink(objLink)) );
+console.log(getLinksMd(getMdFiles('./test')));
 
 export const linksValidate = (linksArr) => {  
     const objLinksValidate = linksArr.map((links) => {
@@ -82,19 +40,19 @@ export const linksValidate = (linksArr) => {
     unique: new Set(arrLinks.map(link => link.href)).size
   }]);
 
-  const validateLinksBroken = arrLinks => arrLinks.filter(link => link.status === 404).length;
+  const validateBroken = arrLinks => arrLinks.filter(link => link.status === 404).length;
 
 
-  const validateBothOptions = links => ([{
-    total: linkStats(links)[0].total,
-    unique: linkStats(links)[0].unique,
-    broken: validateLinksBroken(links)
+  const validateAndStats = arrLinks => ([{
+    total: linkStats(arrLinks)[0].total,
+    unique: linkStats(arrLinks)[0].unique,
+    broken: validateBroken(arrLinks)
   }]);
   
 
-  linksValidate(getLinksMd(mdLinks('./test')))
+  linksValidate(getLinksMd(getMdFiles('./test')))
   .then(res => console.log(res)); 
 
-// console.log(linksValidate((getLinksMd(mdLinks('./test')))));
+// console.log(linksValidate((getLinksMd(getMdFiles('./test')))));
 // console.log(process.argv);
-console.log(validateBothOptions(getLinksMd(mdLinks('./test'))));
+console.log(validateAndStats(getLinksMd(getMdFiles('./test'))));

@@ -1,5 +1,7 @@
 // require('../index.js')
 import {pathValidate, validateDirectory} from"../src/getAllMds.js";
+import {getLinksMd, getMdFiles, linksValidate, linkStats, validateBroken, validateAndStats} from"../src/index.js";
+
 
 
 
@@ -21,68 +23,50 @@ describe('validateDirectory', () => {
   });
 })
 
-// describe('mostrar', () => {
-// it('Debería retornar un array de objetos con las siguientes propiedades: href. text, file', () => {
-//   return mdLinks('./prueba.md', {validate:false, stats:false}).then(data => {
-//     expect(data).toEqual(
-//       [ {
-//          file: 'C:\Users\Usuario\Desktop\md-links\LIM008-fe-md-links\test\texto.md',
-//          href: 'http://www.google.com.pee',
-//          text: 'Google'
-//         },
-//         {
-//           file: 'C:\Users\Usuario\Desktop\md-links\LIM008-fe-md-links\test\texto.md',
-//           href: 'https://www.mentadays.com',
-//           text: 'Menta Days: Reinventa tu creatividad'
-//         }
-//       ]
-//     );
-//   });
-// });
+describe('getLinksMd', () => {
+  it('getLinksMd debería ser una funcion', () => {
+    expect(typeof getLinksMd).toBe('function');
+  });  
+  it('getLinksMd debería devolver true si la ruta es un directorio', () => {
+  expect(getLinksMd([ 'test\\texto.md' ])).toEqual([ { text: 'Menta Days: Reinventa tu creatividad',
+  href: 'https://www.mentadays.com',
+  file: 'test\\texto.md' } ]);
+  });
+})
 
-// it('Debería retornar un array de objetos con las siguientes propiedades: href. text, file y el resultado de la validacion de links', () => {
-//   return mdLinks('./prueba.md', {validate:true, stats:false}).then(data => {
-//     expect(data).toEqual(
-//       [ {
-//          file: 'C:\Users\Usuario\Desktop\md-links\LIM008-fe-md-links\test\texto.md',
-//          href: 'http://www.google.com.pee',
-//          text: 'Google',
-//          response: 'fail',
-//          status: 404
-//         },
-//         {
-//           file: 'C:\Users\Usuario\Desktop\md-links\LIM008-fe-md-links\test\texto.md',
-//           href: 'https://www.mentadays.com',
-//           text: 'Menta Days: Reinventa tu creatividad',
-//           response: 'ok',
-//           status: 200
-//         }
-//       ]
-//     );
-//   });
-// });
+describe('validateDirectory', () => {
+  it('validateDirectory debería ser una funcion', () => {
+    expect(typeof validateDirectory).toBe('function');
+  });  
+  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
+  expect(validateDirectory('.\\test')).toBe(true);
+  });
+})
 
-// it('Debería retornar un texto con estadísticas básicas sobre los links', () => {
-//   return mdLinks('./prueba.md', {validate:false, stats:true}).then(data => {
-//     expect(data).toEqual(
-//       {
-//         Total: 2,
-//         Unique: 2
-//       }
-//     );
-//   });
-// });
+describe('validateDirectory', () => {
+  it('validateDirectory debería ser una funcion', () => {
+    expect(typeof validateDirectory).toBe('function');
+  });  
+  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
+  expect(validateDirectory('.\\test')).toBe(true);
+  });
+})
 
-// it('Debería retornar un texto con estadísticas que necesiten de los resultados de la validación', () => {
-//   return mdLinks('./prueba.md', {validate:true, stats:true}).then(data => {
-//     expect(data).toEqual(
-//       {
-//         Total: 2,
-//         Unique: 2,
-//         Broken: 1
-//       }
-      
-//     );
-//   });
-// });
-// })
+describe('validateDirectory', () => {
+  it('validateDirectory debería ser una funcion', () => {
+    expect(typeof validateDirectory).toBe('function');
+  });  
+  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
+  expect(validateDirectory('.\\test')).toBe(true);
+  });
+})
+
+describe('validateDirectory', () => {
+  it('validateDirectory debería ser una funcion', () => {
+    expect(typeof validateDirectory).toBe('function');
+  });  
+  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
+  expect(validateDirectory('.\\test')).toBe(true);
+  });
+})
+
