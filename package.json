@@ -2,7 +2,7 @@
   "name": "social-network",
   "version": "1.0.0",
   "description": "Social Network @ Laboratoria",
-  "main": "src/index.html",
+  "main": "lib/main.js",
   "keywords": [
     "javascript",
     "npm",
@@ -13,6 +13,9 @@
     "eslint": "eslint --ext .js src/ test/",
     "test": "jest --coverage",
     "build": "babel src -d lib"
+  },
+  "bin": {
+    "md-links": "./lib/cli.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

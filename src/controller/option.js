@@ -3,8 +3,6 @@ const path = require('path');
 const marked = require('marked');
 const fetch = require('node-fetch');
 
-import {getLinksMd, getMdFiles } from './getAllMds.js'
-
 
 // console.log(getMdFiles('./test'));
 // console.log(getLinksMd(getMdFiles('./test')));
@@ -35,24 +33,27 @@ export const linksValidate = (linksArr) => {
     return Promise.all(objLinksValidate);
   };
 
-  const linkStats = arrLinks => ([{
+  export const linkStats = arrLinks => ([{
     total: arrLinks.length,
     unique: new Set(arrLinks.map(link => link.href)).size
   }]);
 
-  const validateBroken = arrLinks => arrLinks.filter(link => link.status === 404).length;
+  export const validateBroken = arrLinks => arrLinks.filter(link => parseInt(link.status) === 404).length;
 
 
-  const validateAndStats = arrLinks => ([{
+  export const validateAndStats = arrLinks => ([{
     total: linkStats(arrLinks)[0].total,
     unique: linkStats(arrLinks)[0].unique,
     broken: validateBroken(arrLinks)
   }]);
   
+//   // Resultado de solo path:
+// console.log(getLinksMd(getMdFiles('./test')));
+// // Resultado de validate:
+//   linksValidate(getLinksMd(getMdFiles('./test'))).then(res => console.log(res)); 
+// // Resultado de stats:
+//   linksValidate(getLinksMd(getMdFiles('./test'))).then(res => console.log(linkStats(res))); 
 
-  linksValidate(getLinksMd(getMdFiles('./test')))
-  .then(res => console.log(res)); 
 
-// console.log(linksValidate((getLinksMd(getMdFiles('./test')))));
-// console.log(process.argv);
-console.log(validateAndStats(getLinksMd(getMdFiles('./test'))));
+// // Resultado de validate y stats:
+// linksValidate(getLinksMd(getMdFiles('./test'))).then(res => console.log(validateAndStats(res))); 

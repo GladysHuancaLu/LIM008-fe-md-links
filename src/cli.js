@@ -1,24 +1,15 @@
-const mdLinks = require('./main.js');
-const [,, ... args] = process.argv;
+#!/usr/bin/env node
+import {mdLinks } from './main.js'
+import {validateAndStats, linkStats} from './controller/option.js'
+const args = process.argv;
+// console.log(process.argv);
 
-if (args[1] === '--validate' && args[2] === '--stats') {
-    const options = {
-        validate: true,
-        stats: true
-      };
-  mdLinks(args[0], options).then(resp => console.log(resp));
-} else if (args[1] === '--validate') {
-    const options = {
-        validate: true,
-        stats: false
-      };
-  mdLinks(args[0], options).then(resp => console.log(resp));
-} else if (args[1] === '--stats') {
-    const options = {
-        validate: false,
-        stats: true
-      };
-  mdLinks(args[0], options).then(resp => console.log(resp));
+if (args.includes('--validate') && args.includes('--stats')){
+  mdLinks(args[2], {validate: true, stats: true}).then(resp => console.log(validateAndStats(resp)));
+} else if (args.includes('--validate')) {
+  mdLinks(args[2], {validate: true}).then(resp => console.log(resp));
+} else if (args.includes('--stats')) {
+  mdLinks(args[2], {stats: true}).then(resp => console.log(linkStats(resp)));
 } else {
-  mdLinks(args[0], options).then(resp => console.log(resp));
+  mdLinks(args[2], {validate: false, stats: false}).then(resp => console.log(resp));
 }
