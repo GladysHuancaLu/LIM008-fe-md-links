@@ -1,4 +1,5 @@
 import {getLinksMd, getMdFiles } from './getAllMds.js'
+import {linksValidate, linkStats, validateAndStats } from './getAllMds.js'
 
 const options = {
     validate: false,
@@ -6,16 +7,20 @@ const options = {
   };
 
   export const mdLinks = (path, options) => {
-    if(options.validate== false && options.stats== false){
-        return getLinksMd(getMdFiles(path));
-    }
-    else if(options.validate== true && options.stats== false){
-        return linksValidate(getLinksMd(getMdFiles(path)));
-    }
-    else if(options.validate== false && options.stats== true){
-        return linkStats(getLinksMd(getMdFiles(path)));
-    }
-    else if(options.validate== true && options.stats== true){
-        return validateAndStats(getLinksMd(getMdFiles(path)));
-    }
+      return new Promise((res,rej)=>{
+        if(options.validate== false && options.stats== false){
+            res (getLinksMd(getMdFiles(path)));
+        }
+        else if(options.validate== true && options.stats== false){
+            res (linksValidate(getLinksMd(getMdFiles(path))));
+        }
+        else if(options.validate== false && options.stats== true){
+            res (linkStats(getLinksMd(getMdFiles(path))));
+        }
+        else if(options.validate== true && options.stats== true){
+            res (validateAndStats(getLinksMd(getMdFiles(path))));
+        }
+      })
   }
+
+  console.log(mdLinks(".../test", options));

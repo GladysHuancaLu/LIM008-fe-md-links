@@ -6,8 +6,8 @@ const fetch = require('node-fetch');
 import {getLinksMd, getMdFiles } from './getAllMds.js'
 
 
-
-console.log(getLinksMd(getMdFiles('./test')));
+// console.log(getMdFiles('./test'));
+// console.log(getLinksMd(getMdFiles('./test')));
 
 export const linksValidate = (linksArr) => {  
     const objLinksValidate = linksArr.map((links) => {
@@ -24,7 +24,7 @@ export const linksValidate = (linksArr) => {
               resolve(links); 
             }
           }).catch(error => {
-             links.state = 'no es url';
+             links.status = 'no es url';
              links.message = 'fail';
              resolve(links);
             // return reject(error);

@@ -13,6 +13,7 @@ export const validateDirectory = (ruta) => {
 export const getLinksMd = (arrayFiles) => {
     const arrLinks = [];
     arrayFiles.forEach(file => {
+        file = pathValidate(file);
       const fileMd = fs.readFileSync(file, 'utf8');
       const renderer = new marked.Renderer();
       renderer.link = (href, title, text) => {

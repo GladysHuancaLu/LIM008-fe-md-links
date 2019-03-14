@@ -1,6 +1,6 @@
 // require('../index.js')
-import {pathValidate, validateDirectory} from"../src/getAllMds.js";
-import {getLinksMd, getMdFiles, linksValidate, linkStats, validateBroken, validateAndStats} from"../src/index.js";
+import {pathValidate, validateDirectory, getLinksMd, getMdFiles} from"../src/controller/getAllMds.js";
+import {linksValidate, linkStats, validateBroken, validateAndStats} from"../src/controller/option.js";
 
 
 
@@ -28,38 +28,78 @@ describe('getLinksMd', () => {
     expect(typeof getLinksMd).toBe('function');
   });  
   it('getLinksMd debería devolver true si la ruta es un directorio', () => {
-  expect(getLinksMd([ 'test\\texto.md' ])).toEqual([ { text: 'Menta Days: Reinventa tu creatividad',
-  href: 'https://www.mentadays.com',
-  file: 'test\\texto.md' } ]);
+  expect(getLinksMd([ 'test\\texto.md' ])).toEqual(
+    [ { text: 'Google Link',
+    href: 'http://www.google.com.pee',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+  { text: 'Menta Days: Reinventa tu creatividad',
+    href: 'https://www.mentadays.com',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+  { text: 'Postula a Laboratoria',
+    href: 'https://www.laboratoria.la/inscibiteAqui/',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' } ]
+  );
   });
 })
 
-describe('validateDirectory', () => {
-  it('validateDirectory debería ser una funcion', () => {
-    expect(typeof validateDirectory).toBe('function');
+describe('getMdFiles', () => {
+  it('getMdFiles debería ser una funcion', () => {
+    expect(typeof getMdFiles).toBe('function');
   });  
-  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
-  expect(validateDirectory('.\\test')).toBe(true);
+  it('getMdFiles debería devolver un arrays de todos los archivos contenidos', () => {
+  expect(getMdFiles('.\\test')).toEqual(
+    [ 'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\archivoVacio.md',
+      'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' ]
+  );
   });
 })
 
-describe('validateDirectory', () => {
-  it('validateDirectory debería ser una funcion', () => {
-    expect(typeof validateDirectory).toBe('function');
-  });  
-  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
-  expect(validateDirectory('.\\test')).toBe(true);
-  });
-})
+const imput1= 
+[ { text: 'Google Link',
+    href: 'http://www.google.com.pee',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+  { text: 'Menta Days: Reinventa tu creatividad',
+    href: 'https://www.mentadays.com',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+  { text: 'Postula a Laboratoria',
+    href: 'https://www.laboratoria.la/inscibiteAqui/',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' } ];
+const imput2=
+[ { text: 'Google Link',
+    href: 'http://www.google.com.pee',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    status: 'no es url',
+    message: 'fail' },
+  { text: 'Menta Days: Reinventa tu creatividad',
+    href: 'https://www.mentadays.com',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    status: 200,
+    message: 'OK' },
+  { text: 'Postula a Laboratoria',
+    href: 'https://www.laboratoria.la/inscibiteAqui/',
+    file:
+     'C:\\Users\\Usuario\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    status: 404,
+    message: 'Fail' } ];
 
-describe('validateDirectory', () => {
-  it('validateDirectory debería ser una funcion', () => {
-    expect(typeof validateDirectory).toBe('function');
-  });  
-  it('validateDirectory debería devolver true si la ruta es un directorio', () => {
-  expect(validateDirectory('.\\test')).toBe(true);
+describe('linksValidate', () => {
+  it('Deberia retornar un array de objetos con cinco propiedades: href, text, file, status, message', (done) => {
+    linksValidate(imput1).then((resolve) => {
+      expect(resolve).toEqual(imput2); 
+      done(); 
+    });
   });
-})
+});  
+
+
 
 describe('validateDirectory', () => {
   it('validateDirectory debería ser una funcion', () => {
