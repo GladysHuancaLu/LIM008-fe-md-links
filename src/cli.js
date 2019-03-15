@@ -2,31 +2,20 @@
 import {mdLinks } from './main.js'
 import {validateAndStats, linkStats} from './controller/option.js'
 const args = process.argv;
-// console.log(process.argv);
-
-// if (args.includes('--validate') && args.includes('--stats')){
-//   mdLinks(args[2], {validate: true, stats: true}).then(resp => console.log(validateAndStats(resp)));
-// } else if (args.includes('--validate')) {
-//   mdLinks(args[2], {validate: true}).then(resp => console.log(resp));
-// } else if (args.includes('--stats')) {
-//   mdLinks(args[2], {stats: true}).then(resp => console.log(linkStats(resp)));
-// } else {
-//   mdLinks(args[2], {validate: false, stats: false}).then(resp => console.log(resp));
-// }
-
-
 
 export const cli = (args) => {
-  if (args.includes('--validate') && args.includes('--stats')){
-    return mdLinks(args[2], {validate: true, stats: true}).then(resp => console.log(validateAndStats(resp)));
-  } else if (args.includes('--validate')) {
-    return mdLinks(args[2], {validate: true}).then(resp => console.log(resp));
-  } else if (args.includes('--stats')) {
-    return mdLinks(args[2], {stats: true}).then(resp => console.log(linkStats(resp)));
-  } else {
-    return mdLinks(args[2], {validate: false, stats: false}).then(resp => console.log(resp));
-  }
+  return new Promise((res,rej)=>{
+    if (args.includes('--validate') && args.includes('--stats')){
+       mdLinks(args[2], {validate: true, stats: true}).then(resp => res(validateAndStats(resp)));
+    } else if (args.includes('--validate')) {
+      mdLinks(args[2], {validate: true}).then(resp => res(resp));
+    } else if (args.includes('--stats')) {
+       mdLinks(args[2], {stats: true}).then(resp => res(linkStats(resp)));
+    } else {
+       mdLinks(args[2], {validate: false, stats: false}).then(resp => res(resp));
+    }
+  })
   
 }
 
-cli(args);
+// cli(args).then(resp => console.log(resp));
