@@ -12,8 +12,8 @@ Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
 muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
 la información que se quiere compartir.
 
+Por ello se crea una libreria que resuelva este problema, facilitando la busqueda y revision de links.
 
-![md-links](https://user-images.githubusercontent.com/110297/42118443-b7a5f1f0-7bc8-11e8-96ad-9cc5593715a6.jpg)
 
 ## Diagrama de flujo
 
@@ -21,7 +21,7 @@ la información que se quiere compartir.
 
 ## Board con el backlog para la implementación de la librería.
 
-en el proyect del GitHub se detalla el backlog del producto y del sprint
+En el proyect del GitHub se detalla el backlog del producto y del sprint
 
 ![backlog imagen](./img/backlogProducto.png "Backlog del producto") ![backlog imagen](./img/backlogSprint.png "Backlog del sprint")
 
@@ -56,7 +56,7 @@ las siguientes propiedades:
 
 ## Guía de uso e instalación de la librería
 
-Tu módulo es instalable via `npm install GladysHuancaLu/md-links`. 
+El módulo es instalable via `npm install GladysHuancaLu/md-links`. 
 Se importa con `require` para usarlo
 programáticamente.
 
