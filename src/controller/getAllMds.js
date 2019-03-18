@@ -18,7 +18,7 @@ export const getLinksMd = (arrayFiles) => {
       const renderer = new marked.Renderer();
       renderer.link = (href, title, text) => {
         arrLinks.push({
-          text: text,
+          text: text.slice(0, 50),
           href: href,
           file: file
         });
@@ -31,8 +31,9 @@ export const getLinksMd = (arrayFiles) => {
 export const getMdFiles = (path1) => {
     path1 = pathValidate(path1);
     let arrFile= [];
-    const leeDirectorio = fs.readdirSync(path1)
-    leeDirectorio.forEach((file)=> {
+    if(validateDirectory(path1)){
+        const leeDirectorio = fs.readdirSync(path1)
+        leeDirectorio.forEach((file)=> {
         const pathSon= path.join(path1,file);
         if(validateDirectory(pathSon)){
             arrFile = arrFile.concat(getMdFiles(pathSon));
@@ -40,6 +41,11 @@ export const getMdFiles = (path1) => {
         else if(path.extname(pathSon)=== '.md'){
             arrFile.push(pathSon);
         }
-    });
+        });
+    }
+    else{
+        arrFile.push(path1); 
+    }
+    
     return arrFile;
 }
