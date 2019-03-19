@@ -43,7 +43,7 @@ export const getMdFiles = (path1) => {
         }
         });
     }
-    else{
+    else if(path.extname(path1)=== '.md'){
         arrFile.push(path1); 
     }
     

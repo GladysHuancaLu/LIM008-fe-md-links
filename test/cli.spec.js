@@ -1,39 +1,39 @@
 import {cli} from"../src/cli.js"
 
-const input ='./test';
+const input =`${process.cwd()}\\test`;
 
 const ouput = 
 [ { text: 'Google Link',
 href: 'http://www.google.com.pee',
 file:
- 'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+`${process.cwd()}\\test\\texto.md` },
 { text: 'Menta Days: Reinventa tu creatividad',
 href: 'https://www.mentadays.com',
 file:
- 'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+`${process.cwd()}\\test\\texto.md` },
 { text: 'Postula a Laboratoria',
 href: 'https://www.laboratoria.la/inscibiteAqui/',
 file:
- 'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' } 
+`${process.cwd()}\\test\\texto.md` } 
 ];
 
 const ouput1 = 
 [ { text: 'Google Link',
     href: 'http://www.google.com.pee',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 'no es url',
     message: 'fail' },
   { text: 'Menta Days: Reinventa tu creatividad',
     href: 'https://www.mentadays.com',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 200,
     message: 'OK' },
   { text: 'Postula a Laboratoria',
     href: 'https://www.laboratoria.la/inscibiteAqui/',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 404,
     message: 'Fail' } 
   ];

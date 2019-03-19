@@ -11,7 +11,7 @@ describe('pathValidate', () => {
     expect(typeof pathValidate).toBe('function');
   });  
   it('pathValidate debería cambiar la ruta a abosoluta si es relativa', () => {
-  expect(pathValidate('.\\test')).toBe('C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test');
+  expect(pathValidate('.\\test')).toBe(`${process.cwd()}\\test`);
   });
 })
 
@@ -29,19 +29,19 @@ describe('getLinksMd', () => {
     expect(typeof getLinksMd).toBe('function');
   });  
   it('getLinksMd debería devolver true si la ruta es un directorio', () => {
-  expect(getLinksMd(['C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md'])).toEqual(
+  expect(getLinksMd([`${process.cwd()}\\test\\texto.md`])).toEqual(
     [ { text: 'Google Link',
     href: 'http://www.google.com.pee',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+     `${process.cwd()}\\test\\texto.md` },
   { text: 'Menta Days: Reinventa tu creatividad',
     href: 'https://www.mentadays.com',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+     `${process.cwd()}\\test\\texto.md` },
   { text: 'Postula a Laboratoria',
     href: 'https://www.laboratoria.la/inscibiteAqui/',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' } ]
+     `${process.cwd()}\\test\\texto.md` } ]
   );
   });
 })
@@ -52,8 +52,8 @@ describe('getMdFiles', () => {
   });  
   it('getMdFiles debería devolver un arrays de todos los archivos contenidos', () => {
   expect(getMdFiles('.\\test')).toEqual(
-    [ 'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\archivoVacio.md',
-      'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' ]
+    [ `${process.cwd()}\\test\\archivoVacio.md`,
+      `${process.cwd()}\\test\\texto.md` ]
   );
   });
 })
@@ -62,32 +62,32 @@ const imputLinksValidate=
 [ { text: 'Google Link',
     href: 'http://www.google.com.pee',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+    `${process.cwd()}\\test\\texto.md` },
   { text: 'Menta Days: Reinventa tu creatividad',
     href: 'https://www.mentadays.com',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+    `${process.cwd()}\\test\\texto.md` },
   { text: 'Postula a Laboratoria',
     href: 'https://www.laboratoria.la/inscibiteAqui/',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' } ];
+    `${process.cwd()}\\test\\texto.md` } ];
 const ouputLinksValidate=
 [ { text: 'Google Link',
     href: 'http://www.google.com.pee',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 'no es url',
     message: 'fail' },
   { text: 'Menta Days: Reinventa tu creatividad',
     href: 'https://www.mentadays.com',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 200,
     message: 'OK' },
   { text: 'Postula a Laboratoria',
     href: 'https://www.laboratoria.la/inscibiteAqui/',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 404,
     message: 'Fail' } ];
 
@@ -100,40 +100,40 @@ describe('linksValidate', () => {
   });
 });  
 
-const input ='C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test';
+const input =`${process.cwd()}\\test\\texto.md`;
 
 const ouput = 
 [ { text: 'Google Link',
 href: 'http://www.google.com.pee',
 file:
- 'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+`${process.cwd()}\\test\\texto.md` },
 { text: 'Menta Days: Reinventa tu creatividad',
 href: 'https://www.mentadays.com',
 file:
- 'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' },
+`${process.cwd()}\\test\\texto.md` },
 { text: 'Postula a Laboratoria',
 href: 'https://www.laboratoria.la/inscibiteAqui/',
 file:
- 'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md' } 
+`${process.cwd()}\\test\\texto.md` } 
 ];
 
 const ouput1 = 
 [ { text: 'Google Link',
     href: 'http://www.google.com.pee',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 'no es url',
     message: 'fail' },
   { text: 'Menta Days: Reinventa tu creatividad',
     href: 'https://www.mentadays.com',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 200,
     message: 'OK' },
   { text: 'Postula a Laboratoria',
     href: 'https://www.laboratoria.la/inscibiteAqui/',
     file:
-     'C:\\Users\\Laboratoria\\Desktop\\md-links\\LIM008-fe-md-links\\test\\texto.md',
+    `${process.cwd()}\\test\\texto.md`,
     status: 404,
     message: 'Fail' } 
   ];
